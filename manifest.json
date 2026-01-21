@@ -1,0 +1,23 @@
+{
+  "name": "EXIF Data Viewer",
+  "version": "0.0.1",
+  "manifest_version": 3,
+  "description": "Расширение для просмотра EXIF данных",
+  "default_locale": "en",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "scripting"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}
