@@ -73,42 +73,32 @@ function showExifTooltip(img) {
 function createTooltip(data, img) {
   let tooltip = document.createElement('div');
   tooltip.id = getTooltipId(img);
-  tooltip.style.cssText = `
-        position: fixed;
-        background-color: rgba(0, 0, 0, 0.9);
-        color: white;
-        padding: 15px;
-        border-radius: 8px;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        max-width: 400px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        z-index: 1000000;
-    `;
+  // Класс 'exif-tooltip' берется из styles.css
+  // 'exif-tooltip-hidden' используется для первоначального скрытия через display: none
+//  tooltip.className = 'exif-tooltip exif-tooltip-hidden';
+  tooltip.className = 'exif-tooltip';
+
   const formattedData = Object.entries(data)
     .filter(([key]) => key !== '_raw')
     .map(([key, value]) => {
       let label = key.replace(/([A-Z])/g, ' $1').trim();
 
       label = label.replace(/G P S/, 'GPS');
-
-      return `<div style="margin-bottom: 4px;">
-                <strong>${label}:</strong> ${value}
-            </div>`;
+        return `
+                    <div class="exif-tooltip-label">${label}</div>
+                    <div class="exif-tooltip-value">${value}</div>
+        `;
     });
   tooltip.innerHTML = `
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-            <strong>${chrome.i18n.getMessage("exifDataTitle")}</strong>
-            <div class="exif-close-btn" style="
-                cursor: pointer;
-                color: #999;
-                font-size: 24px;
-                padding: 5px 10px;
-                margin: -5px -10px;
-                user-select: none;
-            ">×</div>
+        <div class="exif-tooltip-header">
+            <div>
+                <div class="exif-tooltip-model" data-exif-model>${chrome.i18n.getMessage("exifDataTitle")}</div>
+                <div class="exif-tooltip-date" data-exif-date>...</div>
+            </div>
+            <div class="exif-tooltip-badge" data-exif-focal35>...</div>
+            <div class="exif-close-btn">×</div>
         </div>
-        <div style="line-height: 1.5;">
+        <div class="exif-tooltip-grid">
             ${formattedData.length ? formattedData.join('') : chrome.i18n.getMessage("noExifData")}
         </div>
     `;

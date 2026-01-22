@@ -30,19 +30,10 @@ try {
             console.error('[EXIF Viewer] Error injecting exif.min.js:', chrome.runtime.lastError);
             return;
           }
-          chrome.scripting.executeScript({
-            target: { tabId: tab.id },
-            files: ["content.js"]
-          }, () => {
-            if (chrome.runtime.lastError) {
-              console.error('[EXIF Viewer] Error injecting content.js:', chrome.runtime.lastError);
-              return;
-            }
-            chrome.tabs.sendMessage(tab.id, {
-              action: "showExifData",
-              imgSrc: info.srcUrl,
-              pageUrl: info.pageUrl
-            });
+          chrome.tabs.sendMessage(tab.id, {
+            action: "showExifData",
+            imgSrc: info.srcUrl,
+            pageUrl: info.pageUrl
           });
         });
       }

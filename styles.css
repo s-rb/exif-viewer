@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Base Styles (for extension context) */
+:root {
+  --color-primary: #6366f1; /* indigo-500 */
+  --color-dark: #1e293b; /* slate-800 */
+  --color-gray-400: #94a3b8;
+  --color-gray-800: #1e293b;
+  --color-bg-dark: #0f172a; /* slate-900 */
+}
+
+/* Base styles for the injected element to avoid affecting the main page */
+.exif-viewer-container * {
+  box-sizing: border-box;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.exif-close-btn {
+    cursor: pointer;
+    color: #999;
+    font-size: 24px;
+    padding: 5px 10px;
+    margin: -5px -10px;
+    user-select: none;
+}
+
+/* Tooltip container and styling from Tailwind + Custom CSS */
+.exif-tooltip {
+  /* classes: tooltip hidden fixed w-80 rounded-xl p-4 z-50 pointer-events-none opacity-0 */
+  position: fixed;
+  width: 20rem; /* w-80 */
+  padding: 1rem; /* p-4 */
+  z-index: 1000000;
+  pointer-events: none;
+  opacity: 1;
+  border-radius: 0.75rem; /* rounded-xl */
+
+  /* Custom .tooltip styles */
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  background: rgba(30, 41, 59, 0.7); /* bg-dark/70 */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform: translateX(-50%);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  color: #e2e8f0; /* text-slate-200 */
+  font-size: 1rem; /* base text size */
+}
+
+/* Arrow pseudo-element */
+.exif-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 8px;
+  height: 8px;
+  background: rgba(30, 41, 59, 0.7);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: -1;
+}
+
+/* Utility Styles for inner elements */
+.exif-tooltip-header {
+  /* flex justify-between items-start mb-3 pb-3 border-b border-gray-800 */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem; /* mb-3 */
+  padding-bottom: 0.75rem; /* pb-3 */
+  border-bottom: 1px solid var(--color-gray-800);
+}
+
+.exif-tooltip-model {
+  /* font-semibold text-lg */
+  font-weight: 600; /* font-semibold */
+  font-size: 1.125rem; /* text-lg */
+}
+
+.exif-tooltip-date {
+  /* text-xs text-gray-400 mt-0.5 */
+  font-size: 0.75rem; /* text-xs */
+  color: var(--color-gray-400);
+  margin-top: 0.125rem; /* mt-0.5 */
+}
+
+.exif-tooltip-badge {
+  /* text-xs px-2 py-0.5 bg-primary/20 text-primary rounded-full font-medium */
+  font-size: 0.75rem; /* text-xs */
+  padding-left: 0.5rem; /* px-2 */
+  padding-right: 0.5rem;
+  padding-top: 0.125rem; /* py-0.5 */
+  padding-bottom: 0.125rem;
+  background-color: rgba(99, 102, 241, 0.2); /* bg-primary/20 */
+  color: var(--color-primary);
+  border-radius: 9999px; /* rounded-full */
+  font-weight: 500; /* font-medium */
+}
+
+.exif-tooltip-grid {
+  /* grid grid-cols-2 gap-2 text-sm */
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem; /* gap-2 */
+  font-size: 0.875rem; /* text-sm */
+}
+
+.exif-tooltip-label {
+  /* text-gray-400 */
+  color: var(--color-gray-400);
+}
+
+.exif-tooltip-value {
+  /* font-medium */
+  font-weight: 500;
+  text-align: right;
+}
+
+/* Visibility classes, controlled by JS */
+.exif-tooltip-hidden {
+  display: none;
+}
+.exif-tooltip-show {
+    opacity: 1 !important;
+}
