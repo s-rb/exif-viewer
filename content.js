@@ -79,7 +79,7 @@ function createTooltip(data, img) {
   tooltip.className = 'exif-tooltip';
 
   const formattedData = Object.entries(data)
-    .filter(([key]) => key !== '_raw')
+    .filter(([key]) => key !== '_raw' && key !== 'Make' && key !== 'Model')
     .map(([key, value]) => {
       let label = key.replace(/([A-Z])/g, ' $1').trim();
 
@@ -89,14 +89,22 @@ function createTooltip(data, img) {
                     <div class="exif-tooltip-value">${value}</div>
         `;
     });
+  // Получаем значения Model и Make
+  const modelEntry = Object.entries(data).find(([key]) => key === 'Model');
+  const makeEntry = Object.entries(data).find(([key]) => key === 'Make');
+  
+  const modelValue = modelEntry ? modelEntry[1] : null;
+  const makeValue = makeEntry ? makeEntry[1] : null;
+  
   tooltip.innerHTML = `
         <div class="exif-tooltip-header">
-            <div>
-                <div class="exif-tooltip-model" data-exif-model>${chrome.i18n.getMessage("exifDataTitle")}</div>
-                <div class="exif-tooltip-date" data-exif-date>...</div>
-            </div>
-            <div class="exif-tooltip-badge" data-exif-focal35>...</div>
-            <div class="exif-close-btn">×</div>
+          <div>
+            ${modelValue ? `<div class="exif-tooltip-model" data-exif-model>${modelValue}</div>` : ''}
+            ${makeValue ? `<div class="exif-tooltip-date" data-exif-date>${makeValue}</div>` : ''}
+            ${!modelValue && !makeValue ? `<div class="exif-tooltip-model" data-exif-model>${chrome.i18n.getMessage("exifDataTitle")}</div>` : ''}
+          </div>
+          <div class="exif-tooltip-badge" data-exif-focal35>...</div>
+          <div class="exif-close-btn">×</div>
         </div>
         <div class="exif-tooltip-grid">
             ${formattedData.length ? formattedData.join('') : chrome.i18n.getMessage("noExifData")}
