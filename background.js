@@ -24,7 +24,7 @@ try {
         lastClick = { x: info.x, y: info.y };
         chrome.scripting.executeScript({
           target: { tabId: tab.id },
-          files: ["exif.min.js"]
+          files: ["lite.umd.min.js"]
         }, () => {
           if (chrome.runtime.lastError) {
             console.error('[EXIF Viewer] Error injecting exif.min.js:', chrome.runtime.lastError);

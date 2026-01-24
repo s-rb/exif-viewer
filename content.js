@@ -37,37 +37,104 @@ function showExifTooltip(img) {
   try {
     const existingTooltips = document.querySelectorAll('[id^="exif-tooltip-"]');
     existingTooltips.forEach(t => t.remove());
+    
+    // Проверяем, доступна ли библиотека exifr
+    if (typeof exifr === 'undefined') {
+      console.error('[EXIF Viewer] exifr library not loaded!');
+      createTooltip({ "Error": chrome.i18n.getMessage("errorLoadingImage") }, img);
+      return;
+    }
+    
     fetch(img.src, {
       mode: 'cors',
       credentials: 'same-origin'
     })
       .then(response => response.blob())
       .then(blob => {
-        const objectUrl = URL.createObjectURL(blob);
-        const newImg = new Image();
-        newImg.onload = function() {
-          EXIF.getData(this, function() {
-            const data = EXIF.getAllTags(this);
-            if (Object.keys(data).length > 0) {
-              createTooltip(data, img);
-            } else {
-              createTooltip({ "Info": chrome.i18n.getMessage("infoNoExifFound") }, img);
-            }
-          });
-        };
-        newImg.onerror = function() {
-          console.error('[EXIF Viewer] Error loading image');
-          createTooltip({ "Error": chrome.i18n.getMessage("errorLoadingImage") }, img);
-        };
-        newImg.src = objectUrl;
+        // Используем exifr.parse() для парсинга EXIF данных из blob
+        return exifr.parse(blob, {
+          translateKeys: true,
+          translateValues: true,
+          reviveValues: true,
+          sanitize: true,
+          mergeOutput: true
+        });
+      })
+      .then(data => {
+        if (data && Object.keys(data).length > 0) {
+          // Адаптируем формат данных exifr к ожидаемому формату
+          const adaptedData = adaptExifrData(data);
+          createTooltip(adaptedData, img);
+        } else {
+          createTooltip({ "Info": chrome.i18n.getMessage("infoNoExifFound") }, img);
+        }
       })
       .catch(error => {
-        console.error('[EXIF Viewer] Error fetching image:', error);
+        console.error('[EXIF Viewer] Error parsing EXIF data:', error);
         createTooltip({ "Error": chrome.i18n.getMessage("errorAccessingImage") }, img);
       });
   } catch (error) {
     console.error('[EXIF Viewer] Error showing tooltip:', error);
   }
+}
+
+// Функция для адаптации данных exifr к формату, ожидаемому createTooltip
+function adaptExifrData(data) {
+  const adapted = {};
+  
+  // Копируем все свойства из данных exifr
+  for (const [key, value] of Object.entries(data)) {
+    // Пропускаем служебные поля
+    if (key === 'errors' || key === '_raw' || key === 'ifd0' || key === 'ifd1' || key === 'exif' || key === 'gps') {
+      // Обрабатываем вложенные объекты отдельно
+      if (key === 'gps' && value && typeof value === 'object') {
+        // Обрабатываем GPS данные
+        if (value.latitude !== undefined && value.longitude !== undefined) {
+          adapted['GPSLocation'] = `${value.latitude.toFixed(6)}, ${value.longitude.toFixed(6)}`;
+        }
+        // Копируем другие GPS поля
+        for (const [gpsKey, gpsValue] of Object.entries(value)) {
+          if (gpsKey !== 'latitude' && gpsKey !== 'longitude' && gpsValue !== null && gpsValue !== undefined) {
+            adapted[gpsKey] = formatValue(gpsValue);
+          }
+        }
+      } else if ((key === 'ifd0' || key === 'exif') && value && typeof value === 'object') {
+        // Копируем поля из вложенных объектов
+        for (const [nestedKey, nestedValue] of Object.entries(value)) {
+          if (nestedValue !== null && nestedValue !== undefined) {
+            adapted[nestedKey] = formatValue(nestedValue);
+          }
+        }
+      }
+      continue;
+    }
+    
+    // Преобразуем значения в строки, если нужно
+    if (value !== null && value !== undefined) {
+      adapted[key] = formatValue(value);
+    }
+  }
+  
+  return adapted;
+}
+
+// Вспомогательная функция для форматирования значений
+function formatValue(value) {
+  if (typeof value === 'string') {
+    return value;
+  } else if (typeof value === 'number') {
+    return value.toString();
+  } else if (Array.isArray(value)) {
+    return value.join(', ');
+  } else if (typeof value === 'object') {
+    // Если это объект с latitude и longitude
+    if (value.latitude !== undefined && value.longitude !== undefined) {
+      return `${value.latitude.toFixed(6)}, ${value.longitude.toFixed(6)}`;
+    }
+    // Иначе преобразуем в JSON строку
+    return JSON.stringify(value);
+  }
+  return String(value);
 }
 
 function createTooltip(data, img) {
