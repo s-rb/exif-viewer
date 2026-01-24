@@ -30,5 +30,13 @@
   "infoNoExifFound": {
     "message": "No EXIF data found in image",
     "description": "Information when no EXIF data is found in image"
+  },
+  "showMore": {
+    "message": "Show more",
+    "description": "Button text to show additional EXIF data"
+  },
+  "showLess": {
+    "message": "Show less",
+    "description": "Button text to hide additional EXIF data"
   }
 }

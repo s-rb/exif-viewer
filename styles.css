@@ -38,7 +38,7 @@
   font-size: 1rem; /* base text size */
   max-width: 400px;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-  color: #e2e8f0; /* text-slate-200 */
+  color: #f1f5f9; /* более яркий и менее прозрачный текст */
   z-index: 1000000;
 }
 
@@ -59,19 +59,27 @@
 
 /* Utility Styles for inner elements */
 .exif-tooltip-header {
-  /* flex justify-between items-start mb-3 pb-3 border-b border-gray-800 */
+  /* flex justify-between items-start mb-3 pb-3 border-b */
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 0.75rem; /* mb-3 */
   padding-bottom: 0.75rem; /* pb-3 */
-  border-bottom: 1px solid var(--color-gray-800);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .exif-tooltip-model {
   /* font-semibold text-lg */
   font-weight: 600; /* font-semibold */
   font-size: 1.125rem; /* text-lg */
+}
+
+.exif-tooltip-make {
+  /* text-sm text-gray-400 mt-0.5 */
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 400;
+  color: #cbd5e1;
+  margin-top: 0.125rem; /* mt-0.5 */
 }
 
 .exif-tooltip-date {
@@ -103,8 +111,8 @@
 }
 
 .exif-tooltip-label {
-  /* text-gray-400 */
-  color: var(--color-gray-400);
+  /* более яркий серый цвет */
+  color: #cbd5e1;
 }
 
 .exif-tooltip-value {
@@ -120,3 +128,71 @@
 .exif-tooltip-show {
     opacity: 1 !important;
 }
+
+/* Show more button */
+.exif-tooltip-more-container {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.exif-tooltip-more-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-gray-400);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.exif-tooltip-more-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #e2e8f0;
+}
+
+/* Additional data sections */
+.exif-tooltip-more {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.exif-tooltip-section {
+  margin-bottom: 0.75rem;
+}
+
+.exif-tooltip-section:last-child {
+  margin-bottom: 0;
+}
+
+.exif-tooltip-section-title {
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--color-gray-400);
+  grid-column: 1 / -1;
+  margin-bottom: 0.25rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+}
+
+/* GPS link */
+.exif-gps-link {
+  color: #e2e8f0;
+  text-decoration: none;
+  transition: all 0.2s;
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
+}
+
+.exif-gps-link:hover {
+  color: #f1f5f9;
+  border-bottom-color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+}
+
