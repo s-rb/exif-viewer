@@ -1,42 +1,43 @@
 {
   "extensionName": {
-    "message": "EXIF Metadata Viewer - Find Information About Images",
+    "message": "Visualizador de metadados EXIF - Encontre informações sobre imagens",
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "View EXIF metadata from images - camera settings, GPS location and more with a right-click. For photographers and privacy users.",
+    "message": "Visualizar metadados EXIF de imagens - configurações da câmera, localização GPS e mais com um clique direito. Para fotógrafos e usuários preocupados com privacidade.",
     "description": "The description of the extension"
   },
   "contextMenuName": {
-    "message": "View EXIF Data",
+    "message": "Visualizar dados EXIF",
     "description": "Title of the context menu item"
   },
   "exifDataTooltipTitle": {
-    "message": "EXIF Data",
+    "message": "Dados EXIF",
     "description": "Title in the EXIF data popup"
   },
   "noExifDataMsg": {
-    "message": "No EXIF data found",
+    "message": "Nenhum dado EXIF encontrado",
     "description": "Message when no EXIF data is found"
   },
   "errorLoadingImageMsg": {
-    "message": "Could not load image data",
+    "message": "Não foi possível carregar os dados da imagem",
     "description": "Error message when image loading fails"
   },
   "errorAccessImageMsg": {
-    "message": "Could not access image data",
+    "message": "Não foi possível acessar os dados da imagem",
     "description": "Error message when accessing image fails"
   },
   "infoNoExifFoundMsg": {
-    "message": "No EXIF data found in image",
+    "message": "Nenhum dado EXIF encontrado na imagem",
     "description": "Information when no EXIF data is found in image"
   },
   "showMore": {
-    "message": "Show more",
+    "message": "Mostrar mais",
     "description": "Button text to show additional EXIF data"
   },
   "showLess": {
-    "message": "Show less",
+    "message": "Mostrar menos",
     "description": "Button text to hide additional EXIF data"
   }
 }
+

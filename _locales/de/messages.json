@@ -1,42 +1,43 @@
 {
   "extensionName": {
-    "message": "EXIF Metadata Viewer - Find Information About Images",
+    "message": "EXIF-Metadaten-Viewer - Finden Sie Informationen über Bilder",
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "View EXIF metadata from images - camera settings, GPS location and more with a right-click. For photographers and privacy users.",
+    "message": "EXIF-Metadaten von Bildern anzeigen - Kameraeinstellungen, GPS-Standort und mehr mit einem Rechtsklick. Für Fotografen und Datenschutz-Nutzer.",
     "description": "The description of the extension"
   },
   "contextMenuName": {
-    "message": "View EXIF Data",
+    "message": "EXIF-Daten anzeigen",
     "description": "Title of the context menu item"
   },
   "exifDataTooltipTitle": {
-    "message": "EXIF Data",
+    "message": "EXIF-Daten",
     "description": "Title in the EXIF data popup"
   },
   "noExifDataMsg": {
-    "message": "No EXIF data found",
+    "message": "Keine EXIF-Daten gefunden",
     "description": "Message when no EXIF data is found"
   },
   "errorLoadingImageMsg": {
-    "message": "Could not load image data",
+    "message": "Bilddaten konnten nicht geladen werden",
     "description": "Error message when image loading fails"
   },
   "errorAccessImageMsg": {
-    "message": "Could not access image data",
+    "message": "Auf Bilddaten konnte nicht zugegriffen werden",
     "description": "Error message when accessing image fails"
   },
   "infoNoExifFoundMsg": {
-    "message": "No EXIF data found in image",
+    "message": "Keine EXIF-Daten im Bild gefunden",
     "description": "Information when no EXIF data is found in image"
   },
   "showMore": {
-    "message": "Show more",
+    "message": "Mehr anzeigen",
     "description": "Button text to show additional EXIF data"
   },
   "showLess": {
-    "message": "Show less",
+    "message": "Weniger anzeigen",
     "description": "Button text to hide additional EXIF data"
   }
 }
+

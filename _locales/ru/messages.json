@@ -1,0 +1,43 @@
+{
+  "extensionName": {
+    "message": "Просмотрщик метаданных EXIF - Найдите информацию об изображениях",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Просмотр метаданных EXIF изображений - настройки камеры, GPS-координаты и многое другое по правому клику. Для фотографов и пользователей, заботящихся о конфиденциальности.",
+    "description": "The description of the extension"
+  },
+  "contextMenuName": {
+    "message": "Просмотреть данные EXIF",
+    "description": "Title of the context menu item"
+  },
+  "exifDataTooltipTitle": {
+    "message": "Данные EXIF",
+    "description": "Title in the EXIF data popup"
+  },
+  "noExifDataMsg": {
+    "message": "Данные EXIF не найдены",
+    "description": "Message when no EXIF data is found"
+  },
+  "errorLoadingImageMsg": {
+    "message": "Не удалось загрузить данные изображения",
+    "description": "Error message when image loading fails"
+  },
+  "errorAccessImageMsg": {
+    "message": "Не удалось получить доступ к данным изображения",
+    "description": "Error message when accessing image fails"
+  },
+  "infoNoExifFoundMsg": {
+    "message": "В изображении не найдено данных EXIF",
+    "description": "Information when no EXIF data is found in image"
+  },
+  "showMore": {
+    "message": "Показать больше",
+    "description": "Button text to show additional EXIF data"
+  },
+  "showLess": {
+    "message": "Показать меньше",
+    "description": "Button text to hide additional EXIF data"
+  }
+}
+

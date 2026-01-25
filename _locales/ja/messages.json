@@ -1,42 +1,43 @@
 {
   "extensionName": {
-    "message": "EXIF Metadata Viewer - Find Information About Images",
+    "message": "EXIFメタデータビューアー - 画像の情報を検索",
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "View EXIF metadata from images - camera settings, GPS location and more with a right-click. For photographers and privacy users.",
+    "message": "画像のEXIFメタデータを表示 - カメラ設定、GPS位置情報などを右クリックで表示。写真家やプライバシー重視のユーザー向け。",
     "description": "The description of the extension"
   },
   "contextMenuName": {
-    "message": "View EXIF Data",
+    "message": "EXIFデータを表示",
     "description": "Title of the context menu item"
   },
   "exifDataTooltipTitle": {
-    "message": "EXIF Data",
+    "message": "EXIFデータ",
     "description": "Title in the EXIF data popup"
   },
   "noExifDataMsg": {
-    "message": "No EXIF data found",
+    "message": "EXIFデータが見つかりませんでした",
     "description": "Message when no EXIF data is found"
   },
   "errorLoadingImageMsg": {
-    "message": "Could not load image data",
+    "message": "画像データを読み込めませんでした",
     "description": "Error message when image loading fails"
   },
   "errorAccessImageMsg": {
-    "message": "Could not access image data",
+    "message": "画像データにアクセスできませんでした",
     "description": "Error message when accessing image fails"
   },
   "infoNoExifFoundMsg": {
-    "message": "No EXIF data found in image",
+    "message": "画像にEXIFデータが見つかりませんでした",
     "description": "Information when no EXIF data is found in image"
   },
   "showMore": {
-    "message": "Show more",
+    "message": "もっと見る",
     "description": "Button text to show additional EXIF data"
   },
   "showLess": {
-    "message": "Show less",
+    "message": "折りたたむ",
     "description": "Button text to hide additional EXIF data"
   }
 }
+

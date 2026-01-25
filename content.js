@@ -41,7 +41,7 @@ function showExifTooltip(img) {
     // Проверяем, доступна ли библиотека exifr
     if (typeof exifr === 'undefined') {
       console.error('[EXIF Viewer] exifr library not loaded!');
-      createTooltip({ "Error": chrome.i18n.getMessage("errorLoadingImage") }, img);
+      createTooltip({ "Error": chrome.i18n.getMessage("errorLoadingImageMsg") }, img);
       return;
     }
     
@@ -66,12 +66,12 @@ function showExifTooltip(img) {
           const adaptedData = adaptExifrData(data);
           createTooltip(adaptedData, img);
         } else {
-          createTooltip({ "Info": chrome.i18n.getMessage("infoNoExifFound") }, img);
+          createTooltip({ "Info": chrome.i18n.getMessage("infoNoExifFoundMsg") }, img);
         }
       })
       .catch(error => {
         console.error('[EXIF Viewer] Error parsing EXIF data:', error);
-        createTooltip({ "Error": chrome.i18n.getMessage("errorAccessingImage") }, img);
+        createTooltip({ "Error": chrome.i18n.getMessage("errorAccessImageMsg") }, img);
       });
   } catch (error) {
     console.error('[EXIF Viewer] Error showing tooltip:', error);
@@ -497,12 +497,12 @@ function createTooltip(data, img) {
       <div>
         ${model ? `<div class="exif-tooltip-model" data-exif-model>${model}</div>` : ''}
         ${make ? `<div class="exif-tooltip-make" data-exif-make>${make}</div>` : ''}
-        ${!model && !make ? `<div class="exif-tooltip-model" data-exif-model>${chrome.i18n.getMessage("exifDataTitle")}</div>` : ''}
+        ${!model && !make ? `<div class="exif-tooltip-model" data-exif-model>${chrome.i18n.getMessage("exifDataTooltipTitle")}</div>` : ''}
       </div>
       <div class="exif-close-btn">×</div>
     </div>
     <div class="exif-tooltip-grid">
-      ${mainDataHTML || chrome.i18n.getMessage("noExifData")}
+      ${mainDataHTML || chrome.i18n.getMessage("noExifDataMsg")}
     </div>
     ${hasMoreData ? `
       <div class="exif-tooltip-more-container">

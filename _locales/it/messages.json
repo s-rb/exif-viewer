@@ -1,42 +1,43 @@
 {
   "extensionName": {
-    "message": "EXIF Metadata Viewer - Find Information About Images",
+    "message": "Visualizzatore metadati EXIF - Trova informazioni sulle immagini",
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "View EXIF metadata from images - camera settings, GPS location and more with a right-click. For photographers and privacy users.",
+    "message": "Visualizza i metadati EXIF delle immagini - impostazioni della fotocamera, posizione GPS e altro con un clic destro. Per fotografi e utenti attenti alla privacy.",
     "description": "The description of the extension"
   },
   "contextMenuName": {
-    "message": "View EXIF Data",
+    "message": "Visualizza dati EXIF",
     "description": "Title of the context menu item"
   },
   "exifDataTooltipTitle": {
-    "message": "EXIF Data",
+    "message": "Dati EXIF",
     "description": "Title in the EXIF data popup"
   },
   "noExifDataMsg": {
-    "message": "No EXIF data found",
+    "message": "Nessun dato EXIF trovato",
     "description": "Message when no EXIF data is found"
   },
   "errorLoadingImageMsg": {
-    "message": "Could not load image data",
+    "message": "Impossibile caricare i dati dell'immagine",
     "description": "Error message when image loading fails"
   },
   "errorAccessImageMsg": {
-    "message": "Could not access image data",
+    "message": "Impossibile accedere ai dati dell'immagine",
     "description": "Error message when accessing image fails"
   },
   "infoNoExifFoundMsg": {
-    "message": "No EXIF data found in image",
+    "message": "Nessun dato EXIF trovato nell'immagine",
     "description": "Information when no EXIF data is found in image"
   },
   "showMore": {
-    "message": "Show more",
+    "message": "Mostra di più",
     "description": "Button text to show additional EXIF data"
   },
   "showLess": {
-    "message": "Show less",
+    "message": "Mostra di meno",
     "description": "Button text to hide additional EXIF data"
   }
 }
+

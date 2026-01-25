@@ -1,42 +1,43 @@
 {
   "extensionName": {
-    "message": "EXIF Metadata Viewer - Find Information About Images",
+    "message": "EXIF 메타데이터 뷰어 - 이미지 정보 찾기",
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "View EXIF metadata from images - camera settings, GPS location and more with a right-click. For photographers and privacy users.",
+    "message": "이미지의 EXIF 메타데이터 보기 - 카메라 설정, GPS 위치 등을 우클릭으로 확인. 사진작가 및 개인정보 보호 사용자를 위한 확장 프로그램.",
     "description": "The description of the extension"
   },
   "contextMenuName": {
-    "message": "View EXIF Data",
+    "message": "EXIF 데이터 보기",
     "description": "Title of the context menu item"
   },
   "exifDataTooltipTitle": {
-    "message": "EXIF Data",
+    "message": "EXIF 데이터",
     "description": "Title in the EXIF data popup"
   },
   "noExifDataMsg": {
-    "message": "No EXIF data found",
+    "message": "EXIF 데이터를 찾을 수 없습니다",
     "description": "Message when no EXIF data is found"
   },
   "errorLoadingImageMsg": {
-    "message": "Could not load image data",
+    "message": "이미지 데이터를 로드할 수 없습니다",
     "description": "Error message when image loading fails"
   },
   "errorAccessImageMsg": {
-    "message": "Could not access image data",
+    "message": "이미지 데이터에 액세스할 수 없습니다",
     "description": "Error message when accessing image fails"
   },
   "infoNoExifFoundMsg": {
-    "message": "No EXIF data found in image",
+    "message": "이미지에서 EXIF 데이터를 찾을 수 없습니다",
     "description": "Information when no EXIF data is found in image"
   },
   "showMore": {
-    "message": "Show more",
+    "message": "더 보기",
     "description": "Button text to show additional EXIF data"
   },
   "showLess": {
-    "message": "Show less",
+    "message": "접기",
     "description": "Button text to hide additional EXIF data"
   }
 }
+

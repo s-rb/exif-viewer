@@ -1,8 +1,8 @@
 {
-  "name": "EXIF Data Viewer",
+  "name": "__MSG_extensionName__",
   "version": "0.0.1",
   "manifest_version": 3,
-  "description": "Расширение для просмотра EXIF данных",
+  "description": "__MSG_extensionDescription__",
   "default_locale": "en",
   "icons": {
     "16": "icon16.png",
