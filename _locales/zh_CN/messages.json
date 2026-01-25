@@ -1,10 +1,10 @@
 {
   "extensionName": {
-    "message": "EXIF元数据查看器 - 查找图像信息",
+    "message": "EXIF Viewer - 图像元数据即时查看器",
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "查看图像的EXIF元数据 - 相机设置、GPS位置等，右键点击即可查看。适合摄影师和注重隐私的用户。",
+    "message": "查看任何图像的EXIF元数据 - 相机型号、设置、GPS坐标、拍摄日期等。右键点击图像以显示隐藏的元数据。非常适合摄影师、注重隐私的用户和图像验证。",
     "description": "The description of the extension"
   },
   "contextMenuName": {
@@ -16,11 +16,11 @@
     "description": "Title in the EXIF data popup"
   },
   "noExifDataMsg": {
-    "message": "未找到EXIF数据",
+    "message": "无EXIF数据可用",
     "description": "Message when no EXIF data is found"
   },
   "errorLoadingImageMsg": {
-    "message": "无法加载图像数据",
+    "message": "无法加载图像",
     "description": "Error message when image loading fails"
   },
   "errorAccessImageMsg": {
@@ -28,11 +28,11 @@
     "description": "Error message when accessing image fails"
   },
   "infoNoExifFoundMsg": {
-    "message": "图像中未找到EXIF数据",
+    "message": "此图像不包含EXIF元数据",
     "description": "Information when no EXIF data is found in image"
   },
   "showMore": {
-    "message": "显示更多",
+    "message": "显示更多详情",
     "description": "Button text to show additional EXIF data"
   },
   "showLess": {
@@ -40,4 +40,3 @@
     "description": "Button text to hide additional EXIF data"
   }
 }
-

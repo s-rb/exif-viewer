@@ -1,10 +1,10 @@
 {
   "extensionName": {
-    "message": "EXIF-metagegevensviewer - Vind informatie over afbeeldingen",
+    "message": "EXIF Viewer - Directe Onthulling van Afbeeldingsmetagegevens",
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "Bekijk EXIF-metagegevens van afbeeldingen - camerainstellingen, GPS-locatie en meer met een rechtermuisklik. Voor fotografen en privacygebruikers.",
+    "message": "Bekijk EXIF-metagegevens van elke afbeelding - cameramodel, instellingen, GPS-coördinaten, opnamedatum en meer. Rechtsklik op een afbeelding om verborgen metagegevens te onthullen. Perfect voor fotografen, privacybewuste gebruikers en afbeeldingsverificatie.",
     "description": "The description of the extension"
   },
   "contextMenuName": {
@@ -16,11 +16,11 @@
     "description": "Title in the EXIF data popup"
   },
   "noExifDataMsg": {
-    "message": "Geen EXIF-gegevens gevonden",
+    "message": "Geen EXIF-gegevens beschikbaar",
     "description": "Message when no EXIF data is found"
   },
   "errorLoadingImageMsg": {
-    "message": "Kon afbeeldingsgegevens niet laden",
+    "message": "Afbeelding kon niet worden geladen",
     "description": "Error message when image loading fails"
   },
   "errorAccessImageMsg": {
@@ -28,11 +28,11 @@
     "description": "Error message when accessing image fails"
   },
   "infoNoExifFoundMsg": {
-    "message": "Geen EXIF-gegevens gevonden in afbeelding",
+    "message": "Deze afbeelding bevat geen EXIF-metagegevens",
     "description": "Information when no EXIF data is found in image"
   },
   "showMore": {
-    "message": "Meer tonen",
+    "message": "Meer details tonen",
     "description": "Button text to show additional EXIF data"
   },
   "showLess": {
@@ -40,4 +40,3 @@
     "description": "Button text to hide additional EXIF data"
   }
 }
-

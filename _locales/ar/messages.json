@@ -1,10 +1,10 @@
 {
   "extensionName": {
-    "message": "عارض بيانات EXIF - ابحث عن معلومات حول الصور",
+    "message": "EXIF Viewer - كاشف فوري لبيانات الصور",
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "عرض بيانات EXIF من الصور - إعدادات الكاميرا وموقع GPS والمزيد بنقرة زر الماوس الأيمن. للمصورين ومستخدمي الخصوصية.",
+    "message": "عرض بيانات EXIF من أي صورة - نموذج الكاميرا، الإعدادات، إحداثيات GPS، تاريخ الالتقاط والمزيد. انقر بزر الماوس الأيمن على أي صورة للكشف عن البيانات المخفية. مثالي للمصورين والمستخدمين المهتمين بالخصوصية والتحقق من الصور.",
     "description": "The description of the extension"
   },
   "contextMenuName": {
@@ -16,11 +16,11 @@
     "description": "Title in the EXIF data popup"
   },
   "noExifDataMsg": {
-    "message": "لم يتم العثور على بيانات EXIF",
+    "message": "لا توجد بيانات EXIF متاحة",
     "description": "Message when no EXIF data is found"
   },
   "errorLoadingImageMsg": {
-    "message": "تعذر تحميل بيانات الصورة",
+    "message": "تعذر تحميل الصورة",
     "description": "Error message when image loading fails"
   },
   "errorAccessImageMsg": {
@@ -28,11 +28,11 @@
     "description": "Error message when accessing image fails"
   },
   "infoNoExifFoundMsg": {
-    "message": "لم يتم العثور على بيانات EXIF في الصورة",
+    "message": "هذه الصورة لا تحتوي على بيانات EXIF",
     "description": "Information when no EXIF data is found in image"
   },
   "showMore": {
-    "message": "عرض المزيد",
+    "message": "عرض المزيد من التفاصيل",
     "description": "Button text to show additional EXIF data"
   },
   "showLess": {
@@ -40,4 +40,3 @@
     "description": "Button text to hide additional EXIF data"
   }
 }
-

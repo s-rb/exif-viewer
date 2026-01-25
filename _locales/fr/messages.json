@@ -1,10 +1,10 @@
 {
   "extensionName": {
-    "message": "Visualiseur de métadonnées EXIF - Trouvez des informations sur les images",
+    "message": "EXIF Viewer - Révélateur Instantané de Métadonnées d'Images",
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "Afficher les métadonnées EXIF des images - paramètres de l'appareil photo, emplacement GPS et plus encore avec un clic droit. Pour les photographes et les utilisateurs soucieux de la confidentialité.",
+    "message": "Visualisez les métadonnées EXIF de n'importe quelle image - modèle d'appareil photo, paramètres, coordonnées GPS, date de prise de vue et plus encore. Clic droit sur une image pour révéler les métadonnées cachées. Parfait pour les photographes, les utilisateurs soucieux de la confidentialité et la vérification d'images.",
     "description": "The description of the extension"
   },
   "contextMenuName": {
@@ -16,11 +16,11 @@
     "description": "Title in the EXIF data popup"
   },
   "noExifDataMsg": {
-    "message": "Aucune donnée EXIF trouvée",
+    "message": "Aucune donnée EXIF disponible",
     "description": "Message when no EXIF data is found"
   },
   "errorLoadingImageMsg": {
-    "message": "Impossible de charger les données de l'image",
+    "message": "Impossible de charger l'image",
     "description": "Error message when image loading fails"
   },
   "errorAccessImageMsg": {
@@ -28,11 +28,11 @@
     "description": "Error message when accessing image fails"
   },
   "infoNoExifFoundMsg": {
-    "message": "Aucune donnée EXIF trouvée dans l'image",
+    "message": "Cette image ne contient pas de métadonnées EXIF",
     "description": "Information when no EXIF data is found in image"
   },
   "showMore": {
-    "message": "Afficher plus",
+    "message": "Afficher plus de détails",
     "description": "Button text to show additional EXIF data"
   },
   "showLess": {
@@ -40,4 +40,3 @@
     "description": "Button text to hide additional EXIF data"
   }
 }
-
