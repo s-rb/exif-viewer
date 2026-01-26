@@ -38,5 +38,141 @@
   "showLess": {
     "message": "Show less",
     "description": "Button text to hide additional EXIF data"
+  },
+  "exifDataTitle": {
+    "message": "=== EXIF DATA ===",
+    "description": "Title for full EXIF data copy"
+  },
+  "camera": {
+    "message": "Camera",
+    "description": "Camera label"
+  },
+  "lens": {
+    "message": "Lens",
+    "description": "Lens label"
+  },
+  "aperture": {
+    "message": "Aperture",
+    "description": "Aperture label"
+  },
+  "shutterSpeed": {
+    "message": "Shutter Speed",
+    "description": "Shutter speed label"
+  },
+  "iso": {
+    "message": "ISO",
+    "description": "ISO label"
+  },
+  "focalLength": {
+    "message": "Focal Length",
+    "description": "Focal length label"
+  },
+  "dateTaken": {
+    "message": "Date Taken",
+    "description": "Date taken label"
+  },
+  "coordinates": {
+    "message": "Coordinates",
+    "description": "GPS coordinates label"
+  },
+  "exposureProgram": {
+    "message": "Exposure Program",
+    "description": "Exposure program label"
+  },
+  "whiteBalance": {
+    "message": "White Balance",
+    "description": "White balance label"
+  },
+  "flash": {
+    "message": "Flash",
+    "description": "Flash label"
+  },
+  "artist": {
+    "message": "Artist",
+    "description": "Artist label"
+  },
+  "copyright": {
+    "message": "Copyright",
+    "description": "Copyright label"
+  },
+  "technicalDetails": {
+    "message": "--- Technical ---",
+    "description": "Technical details section title"
+  },
+  "imageSize": {
+    "message": "Image Size",
+    "description": "Image size label"
+  },
+  "orientation": {
+    "message": "Orientation",
+    "description": "Orientation label"
+  },
+  "colorSpace": {
+    "message": "Color Space",
+    "description": "Color space label"
+  },
+  "compression": {
+    "message": "Compression",
+    "description": "Compression label"
+  },
+  "exposureCompensation": {
+    "message": "Exposure Compensation",
+    "description": "Exposure compensation label"
+  },
+  "meteringMode": {
+    "message": "Metering Mode",
+    "description": "Metering mode label"
+  },
+  "imageStabilization": {
+    "message": "Image Stabilization",
+    "description": "Image stabilization label"
+  },
+  "gpsAltitude": {
+    "message": "GPS Altitude",
+    "description": "GPS altitude label"
+  },
+  "videoFrameRate": {
+    "message": "Video Frame Rate",
+    "description": "Video frame rate label"
+  },
+  "hdr": {
+    "message": "HDR",
+    "description": "HDR label"
+  },
+  "flashNotFired": {
+    "message": "Not fired",
+    "description": "Flash not fired text"
+  },
+  "flashFired": {
+    "message": "Fired",
+    "description": "Flash fired text"
+  },
+  "exposureProgramManual": {
+    "message": "Manual",
+    "description": "Manual exposure program"
+  },
+  "exposureProgramProgram": {
+    "message": "Program",
+    "description": "Program exposure program"
+  },
+  "exposureProgramAperture": {
+    "message": "Aperture Priority (A)",
+    "description": "Aperture priority exposure program"
+  },
+  "exposureProgramShutter": {
+    "message": "Shutter Priority (S)",
+    "description": "Shutter priority exposure program"
+  },
+  "whiteBalanceAuto": {
+    "message": "Auto",
+    "description": "Auto white balance"
+  },
+  "whiteBalanceManual": {
+    "message": "Manual",
+    "description": "Manual white balance"
+  },
+  "whiteBalanceDaylight": {
+    "message": "Daylight",
+    "description": "Daylight white balance"
   }
 }

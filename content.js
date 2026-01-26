@@ -301,6 +301,251 @@ function formatForInstagram(data) {
   return parts.join('\n');
 }
 
+// Локализованные функции форматирования
+function formatExposureProgramLocalized(value) {
+  if (value === null || value === undefined) return null;
+  const programMap = {
+    0: chrome.i18n.getMessage("exposureProgramManual"),
+    1: chrome.i18n.getMessage("exposureProgramProgram"),
+    2: chrome.i18n.getMessage("exposureProgramAperture"),
+    3: chrome.i18n.getMessage("exposureProgramShutter"),
+    4: chrome.i18n.getMessage("exposureProgramProgram"),
+    5: chrome.i18n.getMessage("exposureProgramProgram"),
+    6: chrome.i18n.getMessage("exposureProgramProgram"),
+    7: chrome.i18n.getMessage("exposureProgramProgram"),
+    8: chrome.i18n.getMessage("exposureProgramManual")
+  };
+  if (typeof value === 'number' && programMap[value]) {
+    return programMap[value];
+  }
+  return String(value);
+}
+
+function formatWhiteBalanceLocalized(value) {
+  if (value === null || value === undefined) return null;
+  if (typeof value === 'string') {
+    const lower = value.toLowerCase();
+    if (lower.includes('daylight') || lower.includes('дневной')) {
+      return chrome.i18n.getMessage("whiteBalanceDaylight");
+    }
+    return value;
+  }
+  if (typeof value === 'number') {
+    return value === 0 ? chrome.i18n.getMessage("whiteBalanceAuto") : chrome.i18n.getMessage("whiteBalanceManual");
+  }
+  return String(value);
+}
+
+function formatFlashLocalized(value) {
+  if (value === null || value === undefined) return null;
+  if (typeof value === 'object' && value !== null) {
+    const fired = value.fired !== undefined ? value.fired : false;
+    return fired ? chrome.i18n.getMessage("flashFired") : chrome.i18n.getMessage("flashNotFired");
+  }
+  if (typeof value === 'number') {
+    return value === 0 ? chrome.i18n.getMessage("flashNotFired") : chrome.i18n.getMessage("flashFired");
+  }
+  return String(value);
+}
+
+function formatDateTimeFull(value) {
+  if (value === null || value === undefined) return null;
+  
+  let date;
+  if (value instanceof Date) {
+    date = value;
+  } else if (typeof value === 'string') {
+    date = new Date(value);
+    if (isNaN(date.getTime())) {
+      return value;
+    }
+  } else {
+    return String(value);
+  }
+  
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  const seconds = String(date.getSeconds()).padStart(2, '0');
+  
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
+// Форматирование всех EXIF данных для копирования
+function formatAllExifData(data) {
+  const lines = [];
+  lines.push(chrome.i18n.getMessage("exifDataTitle"));
+  lines.push('');
+  
+  // Получаем название камеры без дублирования производителя
+  let cameraName = '';
+  const make = (data.Make || '').trim();
+  const model = (data.Model || '').trim();
+  if (model && make) {
+    if (model.toLowerCase().startsWith(make.toLowerCase())) {
+      cameraName = model;
+    } else {
+      cameraName = `${make} ${model}`;
+    }
+  } else if (model) {
+    cameraName = model;
+  } else if (make) {
+    cameraName = make;
+  }
+  
+  // Основные данные
+  if (cameraName) {
+    lines.push(`${chrome.i18n.getMessage("camera")}: ${cameraName}`);
+  }
+  
+  const lensModel = data.LensModel || data.Lens || null;
+  const hasLensMake = data.LensMake && data.LensMake.trim() !== '';
+  if (lensModel) {
+    const lensFull = hasLensMake && lensModel ? `${data.LensMake} ${lensModel}` : lensModel;
+    lines.push(`${chrome.i18n.getMessage("lens")}: ${lensFull}`);
+  }
+  
+  const aperture = formatFNumber(data.FNumber || data.ApertureValue);
+  if (aperture) {
+    lines.push(`${chrome.i18n.getMessage("aperture")}: ${aperture}`);
+  }
+  
+  const shutterSpeed = formatExposureTime(data.ExposureTime || data.ShutterSpeedValue);
+  if (shutterSpeed) {
+    lines.push(`${chrome.i18n.getMessage("shutterSpeed")}: ${shutterSpeed}`);
+  }
+  
+  const iso = data.ISOSpeedRatings || data.ISO || data.ISOValue || 
+              data.StandardOutputSensitivity || data.RecommendedExposureIndex || 
+              data.ISOSpeed || null;
+  if (iso) {
+    lines.push(`${chrome.i18n.getMessage("iso")}: ${iso}`);
+  }
+  
+  const focalLength = formatFocalLength(data.FocalLength);
+  if (focalLength) {
+    lines.push(`${chrome.i18n.getMessage("focalLength")}: ${focalLength}`);
+  }
+  
+  const dateTime = formatDateTimeFull(data.DateTimeOriginal || data.DateTime || data.CreateDate);
+  if (dateTime) {
+    lines.push(`${chrome.i18n.getMessage("dateTaken")}: ${dateTime}`);
+  }
+  
+  const gpsLat = data.GPSLatitude || null;
+  const gpsLon = data.GPSLongitude || null;
+  if (gpsLat !== null && gpsLat !== undefined && 
+      gpsLon !== null && gpsLon !== undefined) {
+    const lat = typeof gpsLat === 'string' ? parseFloat(gpsLat) : gpsLat;
+    const lon = typeof gpsLon === 'string' ? parseFloat(gpsLon) : gpsLon;
+    if (!isNaN(lat) && !isNaN(lon)) {
+      lines.push(`${chrome.i18n.getMessage("coordinates")}: ${lat.toFixed(6)}, ${lon.toFixed(6)}`);
+    }
+  }
+  
+  const exposureProgram = formatExposureProgramLocalized(data.ExposureProgram);
+  if (exposureProgram) {
+    lines.push(`${chrome.i18n.getMessage("exposureProgram")}: ${exposureProgram}`);
+  }
+  
+  const whiteBalance = formatWhiteBalanceLocalized(data.WhiteBalance || data.WhiteBalanceMode);
+  if (whiteBalance) {
+    lines.push(`${chrome.i18n.getMessage("whiteBalance")}: ${whiteBalance}`);
+  }
+  
+  const flash = formatFlashLocalized(data.Flash);
+  if (flash) {
+    lines.push(`${chrome.i18n.getMessage("flash")}: ${flash}`);
+  }
+  
+  if (data.Artist) {
+    lines.push(`${chrome.i18n.getMessage("artist")}: ${data.Artist}`);
+  }
+  
+  if (data.Copyright) {
+    lines.push(`${chrome.i18n.getMessage("copyright")}: ${data.Copyright}`);
+  }
+  
+  // Технические детали
+  lines.push('');
+  lines.push(chrome.i18n.getMessage("technicalDetails"));
+  
+  const imageWidth = data.ImageWidth || data.ExifImageWidth || data.PixelXDimension || null;
+  const imageHeight = data.ImageHeight || data.ExifImageHeight || data.PixelYDimension || null;
+  if (imageWidth && imageHeight) {
+    lines.push(`${chrome.i18n.getMessage("imageSize")}: ${imageWidth}×${imageHeight}`);
+  }
+  
+  if (data.Orientation) {
+    const orientationMap = {
+      1: chrome.i18n.getUILanguage().startsWith('ru') ? 'Горизонтальная' : 'Horizontal',
+      3: chrome.i18n.getUILanguage().startsWith('ru') ? 'Перевернутая' : 'Rotated 180°',
+      6: chrome.i18n.getUILanguage().startsWith('ru') ? 'Повернута на 90° по часовой' : 'Rotated 90° CW',
+      8: chrome.i18n.getUILanguage().startsWith('ru') ? 'Повернута на 90° против часовой' : 'Rotated 90° CCW'
+    };
+    const orientation = orientationMap[data.Orientation] || String(data.Orientation);
+    lines.push(`${chrome.i18n.getMessage("orientation")}: ${orientation}`);
+  }
+  
+  if (data.ColorSpace) {
+    const colorSpaceMap = {
+      1: 'sRGB',
+      65535: 'Uncalibrated'
+    };
+    const colorSpace = colorSpaceMap[data.ColorSpace] || String(data.ColorSpace);
+    lines.push(`${chrome.i18n.getMessage("colorSpace")}: ${colorSpace}`);
+  }
+  
+  if (data.Compression) {
+    const compressionMap = {
+      1: 'Uncompressed',
+      6: 'JPEG'
+    };
+    const compression = compressionMap[data.Compression] || String(data.Compression);
+    lines.push(`${chrome.i18n.getMessage("compression")}: ${compression}`);
+  }
+  
+  const exposureCompensation = formatExposureCompensation(data.ExposureCompensation || data.ExposureBiasValue);
+  if (exposureCompensation) {
+    lines.push(`${chrome.i18n.getMessage("exposureCompensation")}: ${exposureCompensation}`);
+  }
+  
+  const meteringMode = formatMeteringMode(data.MeteringMode);
+  if (meteringMode) {
+    lines.push(`${chrome.i18n.getMessage("meteringMode")}: ${meteringMode}`);
+  }
+  
+  if (data.ImageStabilization) {
+    const stabilization = data.ImageStabilization === 'On' || data.ImageStabilization === 1 ? 
+      (chrome.i18n.getUILanguage().startsWith('ru') ? 'Включена' : 'On') : 
+      (chrome.i18n.getUILanguage().startsWith('ru') ? 'Выключена' : 'Off');
+    lines.push(`${chrome.i18n.getMessage("imageStabilization")}: ${stabilization}`);
+  }
+  
+  if (data.GPSAltitude) {
+    const altitude = typeof data.GPSAltitude === 'string' ? parseFloat(data.GPSAltitude) : data.GPSAltitude;
+    if (!isNaN(altitude)) {
+      lines.push(`${chrome.i18n.getMessage("gpsAltitude")}: ${altitude.toFixed(1)}m`);
+    }
+  }
+  
+  if (data.VideoFrameRate || data.FrameRate) {
+    lines.push(`${chrome.i18n.getMessage("videoFrameRate")}: ${data.VideoFrameRate || data.FrameRate}`);
+  }
+  
+  if (data.HDR || data.HDRMode || data.CustomRendered) {
+    const hdrValue = data.HDR || data.HDRMode || data.CustomRendered;
+    const hdr = (hdrValue === 'On' || hdrValue === 1 || hdrValue === 2 || hdrValue === 3) ? 
+      (chrome.i18n.getUILanguage().startsWith('ru') ? 'Включен' : 'On') : 
+      (chrome.i18n.getUILanguage().startsWith('ru') ? 'Выключен' : 'Off');
+    lines.push(`${chrome.i18n.getMessage("hdr")}: ${hdr}`);
+  }
+  
+  return lines.join('\n');
+}
+
 function formatExposureCompensation(value) {
   if (value === null || value === undefined) return null;
   const num = typeof value === 'string' ? parseFloat(value) : value;
@@ -636,6 +881,13 @@ function createTooltip(data, img) {
     ${hasMoreData ? `
       <div class="exif-tooltip-more" style="display: none;">
         ${moreDataHTML}
+        <div class="exif-tooltip-copy-all-container">
+          <button class="exif-tooltip-copy-all-btn" data-copy-all-btn title="Скопировать все данные">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+            </svg>
+          </button>
+        </div>
       </div>
     ` : ''}
   `;
@@ -692,6 +944,49 @@ function createTooltip(data, img) {
           setTimeout(() => {
             instagramBtn.innerHTML = originalHTML;
             instagramBtn.style.color = '';
+          }, 2000);
+        } catch (err) {
+          console.error('[EXIF Viewer] Fallback copy failed:', err);
+        }
+        document.body.removeChild(textArea);
+      }
+    });
+  }
+
+  // Обработчик кнопки копирования всех данных
+  const copyAllBtn = tooltip.querySelector('[data-copy-all-btn]');
+  if (copyAllBtn) {
+    copyAllBtn.addEventListener('click', async () => {
+      try {
+        const allDataText = formatAllExifData(data);
+        if (allDataText) {
+          await navigator.clipboard.writeText(allDataText);
+          // Визуальная обратная связь
+          const originalHTML = copyAllBtn.innerHTML;
+          copyAllBtn.innerHTML = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="currentColor"/></svg>';
+          copyAllBtn.style.color = '#4ade80';
+          setTimeout(() => {
+            copyAllBtn.innerHTML = originalHTML;
+            copyAllBtn.style.color = '';
+          }, 2000);
+        }
+      } catch (error) {
+        console.error('[EXIF Viewer] Error copying to clipboard:', error);
+        // Fallback для старых браузеров
+        const textArea = document.createElement('textarea');
+        textArea.value = formatAllExifData(data);
+        textArea.style.position = 'fixed';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+          document.execCommand('copy');
+          const originalHTML = copyAllBtn.innerHTML;
+          copyAllBtn.innerHTML = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="currentColor"/></svg>';
+          copyAllBtn.style.color = '#4ade80';
+          setTimeout(() => {
+            copyAllBtn.innerHTML = originalHTML;
+            copyAllBtn.style.color = '';
           }, 2000);
         } catch (err) {
           console.error('[EXIF Viewer] Fallback copy failed:', err);
