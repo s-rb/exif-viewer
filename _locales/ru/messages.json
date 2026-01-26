@@ -32,7 +32,7 @@
     "description": "Information when no EXIF data is found in image"
   },
   "showMore": {
-    "message": "Показать больше деталей",
+    "message": "Показать больше",
     "description": "Button text to show additional EXIF data"
   },
   "showLess": {

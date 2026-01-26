@@ -134,7 +134,10 @@
   margin-top: 0.75rem;
   padding-top: 0.75rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  text-align: center;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  align-items: center;
 }
 
 .exif-tooltip-more-btn {
@@ -154,6 +157,35 @@
   background: rgba(255, 255, 255, 0.15);
   border-color: rgba(255, 255, 255, 0.25);
   color: #e2e8f0;
+}
+
+/* Instagram copy button */
+.exif-tooltip-instagram-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-gray-400);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.exif-tooltip-instagram-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #e2e8f0;
+}
+
+.exif-tooltip-instagram-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
 }
 
 /* Additional data sections */
