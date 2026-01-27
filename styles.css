@@ -225,6 +225,49 @@
   fill: currentColor;
 }
 
+/* Preview tooltip */
+.exif-preview-tooltip {
+  position: fixed;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  background: rgba(30, 41, 59, 0.7);
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.875rem;
+  max-width: 500px;
+  max-height: 70vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  color: #f1f5f9;
+  z-index: 1000001;
+  pointer-events: none;
+  user-select: text;
+  opacity: 0;
+}
+
+.exif-preview-tooltip .exif-tooltip-header {
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.exif-preview-content {
+  display: grid;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  line-height: 1.5;
+  font-size: 0.875rem;
+}
+
+.exif-preview-line {
+  margin-bottom: 0.125rem;
+}
+
+.exif-preview-line:last-child {
+  margin-bottom: 0;
+}
+
 /* Additional data sections */
 .exif-tooltip-more {
   margin-top: 0.75rem;

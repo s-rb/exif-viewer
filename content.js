@@ -869,14 +869,14 @@ function createTooltip(data, img) {
       ${mainDataHTML || chrome.i18n.getMessage("noExifDataMsg")}
     </div>
     <div class="exif-tooltip-more-container">
+      ${hasMoreData ? `
+              <button class="exif-tooltip-more-btn" data-more-btn>${chrome.i18n.getMessage("showMore")}</button>
+            ` : ''}
       <button class="exif-tooltip-instagram-btn" data-instagram-btn title="Скопировать для Instagram">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
         </svg>
       </button>
-      ${hasMoreData ? `
-              <button class="exif-tooltip-more-btn" data-more-btn>${chrome.i18n.getMessage("showMore")}</button>
-            ` : ''}
     </div>
     ${hasMoreData ? `
       <div class="exif-tooltip-more" style="display: none;">
@@ -912,7 +912,28 @@ function createTooltip(data, img) {
 
   // Обработчик кнопки Instagram
   const instagramBtn = tooltip.querySelector('[data-instagram-btn]');
+  let instagramPreview = null;
   if (instagramBtn) {
+    // Обработчик наведения для превью
+    instagramBtn.addEventListener('mouseenter', () => {
+      const instagramText = formatForInstagram(data);
+      if (instagramText) {
+        instagramPreview = createPreviewTooltip(instagramText, instagramBtn);
+      }
+    });
+
+    instagramBtn.addEventListener('mouseleave', () => {
+      if (instagramPreview) {
+        instagramPreview.style.opacity = '0';
+        setTimeout(() => {
+          if (instagramPreview && instagramPreview.parentNode) {
+            instagramPreview.remove();
+          }
+          instagramPreview = null;
+        }, 200);
+      }
+    });
+
     instagramBtn.addEventListener('click', async () => {
       try {
         const instagramText = formatForInstagram(data);
@@ -955,7 +976,28 @@ function createTooltip(data, img) {
 
   // Обработчик кнопки копирования всех данных
   const copyAllBtn = tooltip.querySelector('[data-copy-all-btn]');
+  let copyAllPreview = null;
   if (copyAllBtn) {
+    // Обработчик наведения для превью
+    copyAllBtn.addEventListener('mouseenter', () => {
+      const allDataText = formatAllExifData(data);
+      if (allDataText) {
+        copyAllPreview = createPreviewTooltip(allDataText, copyAllBtn);
+      }
+    });
+
+    copyAllBtn.addEventListener('mouseleave', () => {
+      if (copyAllPreview) {
+        copyAllPreview.style.opacity = '0';
+        setTimeout(() => {
+          if (copyAllPreview && copyAllPreview.parentNode) {
+            copyAllPreview.remove();
+          }
+          copyAllPreview = null;
+        }, 200);
+      }
+    });
+
     copyAllBtn.addEventListener('click', async () => {
       try {
         const allDataText = formatAllExifData(data);
@@ -1025,4 +1067,98 @@ function createTooltip(data, img) {
 
 function getTooltipId(img) {
   return 'exif-tooltip-' + (img.src || img.dataset.id);
+}
+
+// Создание превью тултипа для кнопок копирования
+function createPreviewTooltip(text, button) {
+  // Удаляем существующий превью, если есть
+  const existingPreview = document.querySelector('.exif-preview-tooltip');
+  if (existingPreview) {
+    existingPreview.remove();
+  }
+
+  const preview = document.createElement('div');
+  preview.className = 'exif-preview-tooltip';
+  preview.style.opacity = '0';
+  
+  // Форматируем текст для отображения (сохраняем переносы строк)
+  const formattedText = text.split('\n').map(line => {
+    if (line.trim() === '') return '<br>';
+    return `<div class="exif-preview-line">${escapeHtml(line)}</div>`;
+  }).join('');
+
+  preview.innerHTML = `
+    <div class="exif-tooltip-header">
+      <div class="exif-tooltip-model">Preview</div>
+    </div>
+    <div class="exif-preview-content">
+      ${formattedText}
+    </div>
+  `;
+
+  document.body.appendChild(preview);
+
+  // Получаем размеры после добавления в DOM
+  const previewRect = preview.getBoundingClientRect();
+  const buttonRect = button.getBoundingClientRect();
+  const padding = 10;
+  const gap = 8;
+
+  // Проверяем, есть ли место справа
+  const spaceRight = window.innerWidth - buttonRect.right;
+  const spaceLeft = buttonRect.left;
+  const previewWidth = previewRect.width;
+
+  let left, top;
+
+  if (spaceRight >= previewWidth + gap + padding) {
+    // Размещаем справа
+    left = buttonRect.right + gap;
+    top = buttonRect.top;
+  } else if (spaceLeft >= previewWidth + gap + padding) {
+    // Размещаем слева
+    left = buttonRect.left - previewWidth - gap;
+    top = buttonRect.top;
+  } else {
+    // Если места нет ни справа, ни слева, размещаем там, где больше места
+    if (spaceRight > spaceLeft) {
+      left = buttonRect.right + gap;
+      top = buttonRect.top;
+    } else {
+      left = buttonRect.left - previewWidth - gap;
+      top = buttonRect.top;
+    }
+  }
+
+  // Убеждаемся, что тултип не выходит за границы экрана
+  if (left + previewWidth > window.innerWidth - padding) {
+    left = window.innerWidth - previewWidth - padding;
+  }
+  if (left < padding) {
+    left = padding;
+  }
+  if (top + previewRect.height > window.innerHeight - padding) {
+    top = window.innerHeight - previewRect.height - padding;
+  }
+  if (top < padding) {
+    top = padding;
+  }
+
+  preview.style.left = left + 'px';
+  preview.style.top = top + 'px';
+
+  // Плавное появление
+  requestAnimationFrame(() => {
+    preview.style.transition = 'opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1)';
+    preview.style.opacity = '1';
+  });
+
+  return preview;
+}
+
+// Функция для экранирования HTML
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
 }
