@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "View EXIF metadata from any image - camera model, settings, GPS coordinates, date taken, and more. Right-click any image to reveal hidden metadata. Perfect for photographers, privacy-conscious users, and image verification.",
+    "message": "Chrome extension to view EXIF photo metadata from any image: camera model, lens, exposure settings, GPS location, date taken and more. Right-click an image to reveal hidden metadata directly in your browser. Ideal EXIF viewer for photographers, OSINT, and privacy-conscious users.",
     "description": "The description of the extension"
   },
   "contextMenuName": {
