@@ -45,30 +45,61 @@ function showExifTooltip(img) {
       return;
     }
     
+    const parseBlobAndShow = (blob) => {
+      return exifr.parse(blob, {
+        translateKeys: true,
+        translateValues: true,
+        reviveValues: true,
+        sanitize: true,
+        mergeOutput: true
+      })
+        .then(data => {
+          if (data && Object.keys(data).length > 0) {
+            const adaptedData = adaptExifrData(data);
+            createTooltip(adaptedData, img);
+          } else {
+            createTooltip({ "Info": chrome.i18n.getMessage("infoNoExifFoundMsg") }, img);
+          }
+        })
+        .catch(error => {
+          console.error('[EXIF Viewer] Error parsing EXIF data:', error);
+          createTooltip({ "Error": chrome.i18n.getMessage("errorAccessImageMsg") }, img);
+        });
+    };
+
+    // Для file:// загружаем через background (CORS блокирует fetch из контент-скрипта)
+    if (img.src.startsWith('file://')) {
+      chrome.runtime.sendMessage({ action: 'fetchImage', url: img.src }, (response) => {
+        if (chrome.runtime.lastError) {
+          console.error('[EXIF Viewer]', chrome.runtime.lastError.message);
+          createTooltip({ "Error": chrome.i18n.getMessage("errorAccessImageMsg") }, img);
+          return;
+        }
+        if (!response || !response.success || !response.data) {
+          createTooltip({ "Error": response?.error || chrome.i18n.getMessage("errorAccessImageMsg") }, img);
+          return;
+        }
+        // Данные приходят в base64 (только первые ~512 KB файла, достаточно для EXIF)
+        // Декодируем и создаем Blob - exifr поддерживает Blob
+        const binary = atob(response.data);
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) {
+          bytes[i] = binary.charCodeAt(i);
+        }
+        const mime = (img.src.match(/\.(jpe?g|png|webp|tiff?|heic)/i) || [])[1];
+        const type = mime ? (mime.toLowerCase() === 'jpg' ? 'image/jpeg' : `image/${mime}`) : 'image/jpeg';
+        const blob = new Blob([bytes], { type });
+        parseBlobAndShow(blob);
+      });
+      return;
+    }
+
     fetch(img.src, {
       mode: 'cors',
       credentials: 'same-origin'
     })
       .then(response => response.blob())
-      .then(blob => {
-        // Используем exifr.parse() для парсинга EXIF данных из blob
-        return exifr.parse(blob, {
-          translateKeys: true,
-          translateValues: true,
-          reviveValues: true,
-          sanitize: true,
-          mergeOutput: true
-        });
-      })
-      .then(data => {
-        if (data && Object.keys(data).length > 0) {
-          // Адаптируем формат данных exifr к ожидаемому формату
-          const adaptedData = adaptExifrData(data);
-          createTooltip(adaptedData, img);
-        } else {
-          createTooltip({ "Info": chrome.i18n.getMessage("infoNoExifFoundMsg") }, img);
-        }
-      })
+      .then(parseBlobAndShow)
       .catch(error => {
         console.error('[EXIF Viewer] Error parsing EXIF data:', error);
         createTooltip({ "Error": chrome.i18n.getMessage("errorAccessImageMsg") }, img);

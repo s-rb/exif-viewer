@@ -24,6 +24,9 @@
     "contextMenus",
     "scripting"
   ],
+  "host_permissions": [
+    "file:///*"
+  ],
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"
   }

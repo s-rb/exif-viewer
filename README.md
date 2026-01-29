@@ -2,7 +2,7 @@
 
 A Chrome browser extension that allows you to view EXIF metadata from images directly in your browser.
 
-[Русский](README_RUS.md) | English
+English | [Русский](README_RUS.md)
 
 ## Features
 
