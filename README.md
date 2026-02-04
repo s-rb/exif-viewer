@@ -4,6 +4,8 @@ A Chrome browser extension that allows you to view EXIF metadata from images dir
 
 English | [Русский](README_RUS.md)
 
+![demo-image](./exif-viewer-demo.gif)
+
 ## Features
 
 - **Easy to use**: Simply right-click on any image and select "View EXIF Data"
