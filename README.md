@@ -1,5 +1,7 @@
 # EXIF Data Viewer
 
+<a href="https://buymeacoffee.com/surkoff" target="_blank"><img src="buy_me_a_coffee_40.png" alt="Buy Me A Coffee" height="40"></a>
+
 A Chrome browser extension that allows you to view EXIF metadata from images directly in your browser.
 
 English | [Русский](README_RUS.md)

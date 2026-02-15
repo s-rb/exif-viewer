@@ -1,5 +1,7 @@
 # EXIF Data Viewer
 
+<a href="https://buymeacoffee.com/surkoff" target="_blank"><img src="buy_me_a_coffee_40.png" alt="Buy Me A Coffee" height="40"></a>
+
 Расширение для браузера Google Chrome, позволяющее просматривать метаданные EXIF изображений прямо в браузере.
 
 [English](README.md) | Русский
