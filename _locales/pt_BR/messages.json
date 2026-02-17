@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "Visualize os metadados EXIF de qualquer imagem - modelo da câmera, configurações, coordenadas GPS, data de captura e muito mais. Clique com o botão direito em qualquer imagem para revelar metadados ocultos. Perfeito para fotógrafos, usuários preocupados com privacidade e verificação de imagens.",
+    "message": "Veja dados EXIF (câmera, ajustes, GPS) com um clique. Privado: processamento local. Clique direito na imagem para ver.",
     "description": "The description of the extension"
   },
   "contextMenuName": {

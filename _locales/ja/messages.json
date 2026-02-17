@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "任意の画像からEXIFメタデータを表示 - カメラモデル、設定、GPS座標、撮影日時など。画像を右クリックして隠れたメタデータを表示。写真家、プライバシー重視のユーザー、画像検証に最適。",
+    "message": "画像のEXIF（カメラ、設定、GPS）をワンクリックで表示。プライバシー重視：すべてローカル処理。右クリックで確認できます。",
     "description": "The description of the extension"
   },
   "contextMenuName": {

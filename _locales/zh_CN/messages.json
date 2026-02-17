@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "查看任何图像的EXIF元数据 - 相机型号、设置、GPS坐标、拍摄日期等。右键点击图像以显示隐藏的元数据。非常适合摄影师、注重隐私的用户和图像验证。",
+    "message": "一键查看EXIF数据（相机、设置、GPS）。隐私保护：本地处理。右键点击图片即可查看。",
     "description": "The description of the extension"
   },
   "contextMenuName": {

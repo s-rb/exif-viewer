@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "Visualisez les métadonnées EXIF de n'importe quelle image - modèle d'appareil photo, paramètres, coordonnées GPS, date de prise de vue et plus encore. Clic droit sur une image pour révéler les métadonnées cachées. Parfait pour les photographes, les utilisateurs soucieux de la confidentialité et la vérification d'images.",
+    "message": "Voir les données EXIF (appareil, réglages, GPS) en un clic. Privé : traitement local. Clic droit sur l'image pour voir.",
     "description": "The description of the extension"
   },
   "contextMenuName": {

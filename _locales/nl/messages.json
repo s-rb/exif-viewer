@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "Bekijk EXIF-metagegevens van elke afbeelding - cameramodel, instellingen, GPS-coördinaten, opnamedatum en meer. Rechtsklik op een afbeelding om verborgen metagegevens te onthullen. Perfect voor fotografen, privacybewuste gebruikers en afbeeldingsverificatie.",
+    "message": "Bekijk EXIF (camera, instellingen, GPS) met één klik. Privacy: lokale verwerking. Rechtsklik op afbeelding om te bekijken.",
     "description": "The description of the extension"
   },
   "contextMenuName": {

@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "Zeigen Sie EXIF-Metadaten von jedem Bild an - Kameramodell, Einstellungen, GPS-Koordinaten, Aufnahmedatum und mehr. Rechtsklicken Sie auf ein Bild, um versteckte Metadaten anzuzeigen. Perfekt für Fotografen, datenschutzbewusste Nutzer und Bildverifizierung.",
+    "message": "EXIF-Daten (Kamera, Einstellungen, GPS) per Klick anzeigen. Privat: lokale Verarbeitung. Rechtsklick auf Bild zum Anzeigen.",
     "description": "The description of the extension"
   },
   "contextMenuName": {

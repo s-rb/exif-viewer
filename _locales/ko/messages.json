@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "모든 이미지의 EXIF 메타데이터를 확인하세요 - 카메라 모델, 설정, GPS 좌표, 촬영 날짜 등. 이미지를 우클릭하여 숨겨진 메타데이터를 확인하세요. 사진작가, 개인정보 보호 사용자 및 이미지 검증에 완벽합니다.",
+    "message": "클릭 한 번으로 EXIF(카메라, 설정, GPS) 확인. 개인정보 보호: 모든 처리는 로컬에서. 이미지 우클릭으로 보기.",
     "description": "The description of the extension"
   },
   "contextMenuName": {

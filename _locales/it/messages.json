@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "Visualizza i metadati EXIF di qualsiasi immagine - modello fotocamera, impostazioni, coordinate GPS, data di scatto e altro ancora. Clic destro su un'immagine per rivelare metadati nascosti. Perfetto per fotografi, utenti attenti alla privacy e verifica immagini.",
+    "message": "Vedi dati EXIF (fotocamera, impostazioni, GPS) con un clic. Privato: elaborazione locale. Tasto destro sull'immagine per vedere.",
     "description": "The description of the extension"
   },
   "contextMenuName": {
