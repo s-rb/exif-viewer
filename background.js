@@ -19,23 +19,32 @@ try {
   });
 
   if (chrome.contextMenus) {
-    chrome.contextMenus.onClicked.addListener((info, tab) => {
+    chrome.contextMenus.onClicked.addListener(async (info, tab) => {
       if (info.menuItemId === "viewExif") {
         lastClick = { x: info.x, y: info.y };
-        chrome.scripting.executeScript({
-          target: { tabId: tab.id },
-          files: ["lite.umd.min.js"]
-        }, () => {
-          if (chrome.runtime.lastError) {
-            console.error('[EXIF Viewer] Error injecting exif.min.js:', chrome.runtime.lastError);
-            return;
-          }
+
+        try {
+          // Внедряем CSS
+          await chrome.scripting.insertCSS({
+            target: { tabId: tab.id },
+            files: ["styles.css"]
+          });
+
+          // Внедряем скрипты
+          await chrome.scripting.executeScript({
+            target: { tabId: tab.id },
+            files: ["lite.umd.min.js", "content.js"]
+          });
+
+          // Отправляем сообщение после успешного внедрения
           chrome.tabs.sendMessage(tab.id, {
             action: "showExifData",
             imgSrc: info.srcUrl,
             pageUrl: info.pageUrl
           });
-        });
+        } catch (error) {
+          console.error('[EXIF Viewer] Injection error:', error);
+        }
       }
     });
   }

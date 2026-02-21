@@ -1,6 +1,10 @@
-console.log('[EXIF Viewer] Content script loaded');
+if (window.exifViewerInjected) {
+  console.log('[EXIF Viewer] Script already injected');
+} else {
+  window.exifViewerInjected = true;
+  console.log('[EXIF Viewer] Content script loaded');
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "showExifData") {
     let img = document.querySelector(`img[src="${request.imgSrc}"]`);
     if (!img) {
@@ -20,18 +24,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('[EXIF Viewer] DOM loaded, scanning for images');
-  const images = document.getElementsByTagName('img');
-  console.log(`[EXIF Viewer] Found ${images.length} images`);
-  for (let img of images) {
-    try {
-      console.log('[EXIF Viewer] Found image:', img.src);
-    } catch (error) {
-      console.error('[EXIF Viewer] Error processing image:', error);
-    }
-  }
-});
+
 
 function showExifTooltip(img) {
   try {
@@ -1188,8 +1181,9 @@ function createPreviewTooltip(text, button) {
 }
 
 // Функция для экранирования HTML
-function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
-}
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+} // End of injection guard
